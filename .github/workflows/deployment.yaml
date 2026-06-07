@@ -16,4 +16,4 @@ jobs:
     - run: docker build -t farhan1995/testharish .
     - run: echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}"  --password-stdin
     - run: docker push farhan1995/testharish
-    - run: echo "Deploying to server always" 
+    - run: echo "Deploying to server always always" 
