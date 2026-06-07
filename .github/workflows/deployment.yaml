@@ -30,5 +30,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - run: docker build -t test:latest .
-    - echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}"  --password-stdin
+    - run: docker build -t farhan1995/testharish .
+    - run: echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}"  --password-stdin
+    - run: docker push farhan1995/testharish
+    - echo "Deploying to server" 
