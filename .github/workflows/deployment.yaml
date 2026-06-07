@@ -1,0 +1,34 @@
+
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: "Installing Dependencies"
+      run: npm i
+
+    - name: "Build command"
+      run: npm run build
+
+  unit-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - run: docker build -t test:latest .
+    - echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}"  --password-stdin
